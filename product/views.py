@@ -33,7 +33,7 @@ def get_products(request):
         "count": count,
         "resPerPage": resPerPage,
         "products": serializer.data
-         })
+        })
 
 
 @api_view(['GET'])

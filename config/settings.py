@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     
     "rest_framework",
+    'django_filters',
     'product.apps.ProductConfig',
 ]
 
@@ -92,6 +93,10 @@ DATABASES = {
     }
 }
 
+
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'utils.custom_exceptions_handler.custom_exceptions_handler'
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
