@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from datetime import timedelta
 
 # Load the .env file
 load_dotenv()
@@ -28,7 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG") == "True"
+# DEBUG = os.environ.get("DEBUG") == "True"
+DEBUG = "False"
 
 ALLOWED_HOSTS = []
 
@@ -44,8 +46,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     
     "rest_framework",
+    'rest_framework_simplejwt',
     'django_filters',
     'product.apps.ProductConfig',
+    'account.apps.AccountConfig',
+    'order.apps.OrderConfig',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +62,16 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST=os.environ.get('EMAIL_HOST')
+EMAIL_HOST_USER=os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_PORT=os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS: False
+EMAIL_USE_SSL: False
 
 ROOT_URLCONF = "config.urls"
 
@@ -93,9 +108,19 @@ DATABASES = {
     }
 }
 
-
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'utils.custom_exceptions_handler.custom_exceptions_handler'
+    'EXCEPTION_HANDLER': 'utils.custom_exception_handler.custom_exception_handler',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "BLACKLIST_AFTER_ROTATION": True,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken", ),
 }
 
 # Password validation
