@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
 from datetime import timedelta
-# import dj_database_url
+import dj_database_url
 
 # Load the .env file
 load_dotenv(find_dotenv())
@@ -141,20 +141,20 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASE_URL = os.getenv('DATABASE_URL')
 
-# DATABASES = {
-#     'default': dj_database_url.config(default=DATABASE_URL)
-# }
-
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get('DATABASE_NAME'),
-        "USER": os.environ.get('DATABASE_USER'),
-        "PASSWORD": os.environ.get('DATABASE_PASSWORD'),
-        "HOST": os.environ.get('DATABASE_HOST'),
-        "PORT": os.environ.get('DATABASE_PORT'),
-    }
+    'default': dj_database_url.config(default=DATABASE_URL)
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.environ.get('DATABASE_NAME'),
+#         "USER": os.environ.get('DATABASE_USER'),
+#         "PASSWORD": os.environ.get('DATABASE_PASSWORD'),
+#         "HOST": os.environ.get('DATABASE_HOST'),
+#         "PORT": os.environ.get('DATABASE_PORT'),
+#     }
+# }
 
 REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'utils.custom_exception_handler.custom_exception_handler',
