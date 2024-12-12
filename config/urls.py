@@ -19,7 +19,7 @@ def welcome(request):
         {
             "name": "Emcent E-Commerce API Documentation",
             "message": "Welcome. To View Emcent E-Commerce API Documentation, Click the Link Below.",
-            "url": "ecommerce-production-b6cd.up.railway.app/swagger/",
+            "url": "https://ecommerce-production-b6cd.up.railway.app/swagger/",
             "status": 200,
         }
     )
