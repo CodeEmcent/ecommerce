@@ -72,11 +72,6 @@ def update_user(request):
 
     return Response(serializer.data)
 
-def get_current_host(request):
-    protocol = request.is_secure() and 'https' or 'http'
-    host = request.get_host()
-    return "{protocol}://{host}/".format(protocol=protocol, host=host)
-
 @api_view(['POST'])
 def forgot_password(request):
     data = request.data
