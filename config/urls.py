@@ -19,7 +19,7 @@ def welcome(request):
         {
             "name": "Emcent E-Commerce API Documentation",
             "message": "Welcome. To View Emcent E-Commerce API Documentation, Click the Link Below.",
-            "url": " ",
+            "url": "ecommerce-production-b6cd.up.railway.app/swagger/",
             "status": 200,
         }
     )
@@ -42,6 +42,7 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     
+    path('', welcome),
     path("admin/", admin.site.urls),
     path('product/', include('product.urls')),
     path('account/', include('account.urls')),
