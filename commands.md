@@ -74,3 +74,17 @@ create an .env file
 <!-- 
 web: gunicorn your_project_name.wsgi
 -->
+
+
+# Generating a Secret Key
+<!-- 
+1. Open python shell
+python manage.py shell
+
+2. Import the package
+from django.core.management.utils import get_random_secret_key
+
+3. print the secret key
+print(get_random_secret_key())
+
+-->
