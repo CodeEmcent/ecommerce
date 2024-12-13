@@ -11,6 +11,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
 from .serializers import SignUpSerializer, UserSerializer
+from utils.helpers import get_current_host
 
 # Create your views here.
 
@@ -72,6 +73,8 @@ def update_user(request):
 
     return Response(serializer.data)
 
+
+
 @api_view(['POST'])
 def forgot_password(request):
     data = request.data
@@ -92,7 +95,7 @@ def forgot_password(request):
     body = "Your password reset link is: {link}".format(link=link)
 
     send_mail(
-        "Password reset for eCommerce",
+        "Password reset for eShop",
         body,
         "noreply@eshop.com",
         [data['email']]
